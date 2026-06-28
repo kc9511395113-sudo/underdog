@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hong Kong Value Screener — Friday Shortlist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="hk-theme">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <span class="brand-mark hk">HK</span>
+        <div>
+          <h1>Hong Kong Value Screener</h1>
+          <p class="subtitle">HKEX · Forward P/E · P/B · Dividend</p>
+        </div>
+      </div>
+      <nav class="market-nav">
+        <a href="/" class="nav-link">United States</a>
+        <a href="/hk" class="nav-link active">Hong Kong</a>
+      </nav>
+      <div class="header-meta">
+        <div class="meta-chip" id="last-updated">Loading…</div>
+        <div class="meta-chip accent" id="next-refresh">Next refresh: —</div>
+        <button class="btn-refresh" id="btn-refresh" title="Manual refresh (~3–5 min)">↻ Refresh</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero panel">
+      <div class="hero-grid">
+        <div>
+          <h2>Custom screen (same logic as US)</h2>
+          <ul class="criteria">
+            <li><strong>Forward P/E</strong> &lt; 8</li>
+            <li><strong>P/B</strong> &lt; 0.8</li>
+            <li><strong>Dividend yield</strong> &gt; 5%</li>
+            <li><strong>Sort</strong> lowest forward P/E first</li>
+          </ul>
+          <p class="market-note">Scans top HKEX listings via StockAnalysis. HK market trades at a deep discount vs the US — Hang Seng ~11× vs S&amp;P ~22× forward P/E.</p>
+          <a class="finviz-link" id="source-link" href="#" target="_blank" rel="noopener">Open HKEX list on StockAnalysis ↗</a>
+        </div>
+        <div class="stats-grid" id="stats-grid">
+          <div class="stat-card"><span class="stat-label" id="benchmark-label">Hang Seng Fwd P/E</span><span class="stat-value" id="benchmark-pe">—</span></div>
+          <div class="stat-card"><span class="stat-label">Scanned</span><span class="stat-value" id="stat-universe">—</span></div>
+          <div class="stat-card highlight"><span class="stat-label">Passing</span><span class="stat-value" id="stat-passing">—</span></div>
+          <div class="stat-card"><span class="stat-label">Near misses</span><span class="stat-value" id="stat-near">—</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>Friday Shortlist</h2>
+        <p>Quality tiers — SOE banks, oil, telcos, insurers. Refreshed every <strong>Friday 7:00 AM US Eastern</strong>.</p>
+      </div>
+      <div id="shortlist" class="tier-grid"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>All Passing Stocks</h2>
+        <p id="results-count"></p>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table" id="results-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Code</th>
+              <th>Company</th>
+              <th>Type</th>
+              <th>Tier</th>
+              <th>Fwd P/E</th>
+              <th>P/B</th>
+              <th>Div %</th>
+              <th title="Net cash inflow from market trading, past 5 sessions">Wk Net Inflow</th>
+              <th>Mkt Cap</th>
+              <th>Sector</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="near-misses-section" hidden>
+      <div class="section-head">
+        <h2>Near Misses</h2>
+        <p>Large caps (&gt;HK$50B) passing relaxed screen: Fwd P/E &lt; 12, P/B &lt; 1.0, Div &gt; 5%</p>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table" id="near-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Company</th>
+              <th>Fwd P/E</th>
+              <th>P/B</th>
+              <th>Div %</th>
+              <th>Wk Net Inflow</th>
+              <th>Mkt Cap</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="disclaimer">
+      <p><strong>Disclaimer:</strong> Research tool only — not investment advice. Data from StockAnalysis (HKEX). Verify before trading. Currency: HKD.</p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" hidden></div>
+  <script src="/static/js/screener.js"></script>
+  <script src="/static/js/hk.js"></script>
+</body>
+</html>

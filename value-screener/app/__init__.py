@@ -1,0 +1,1 @@
+"""Shared screener package (Flask lives in app.main — not imported here)."""
